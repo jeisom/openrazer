@@ -2002,15 +2002,6 @@ static ssize_t razer_attr_write_matrix_effect_static(struct device *dev, struct 
     struct razer_report request = {0};
     struct razer_report response = {0};
 
-    switch(usb_dev->descriptor.idProduct) {
-
-    case USB_DEVICE_ID_RAZER_TARTARUS_V2:
-    case USB_DEVICE_ID_RAZER_TARTARUS_PRO:
-        request = razer_chroma_extended_matrix_effect_static(VARSTORE, BACKLIGHT_LED, (struct razer_rgb*)&buf[0]);
-        razer_send_payload(usb_dev, &request);
-        report.transaction_id.id = 0x1F;
-        break;
-
     switch (device->usb_pid) {
     case USB_DEVICE_ID_RAZER_ORBWEAVER:
     case USB_DEVICE_ID_RAZER_DEATHSTALKER_ESSENTIAL:
@@ -2144,7 +2135,8 @@ static ssize_t razer_attr_write_matrix_effect_static(struct device *dev, struct 
     case USB_DEVICE_ID_RAZER_HUNTSMAN_MINI_ANALOG:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V3_MINI:
     case USB_DEVICE_ID_RAZER_BLADE_15_BASE_2022:
-    case USB_DEVICE_ID_RAZER_TARTARUS_V2:
+    case USBA_DEVICE_ID_RAZER_TARTARUS_V2:
+    case USB_DEVICE_ID_RAZER_TARTARUS_PRO:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_PRO:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_75PCT:
